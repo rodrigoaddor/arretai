@@ -1,0 +1,24 @@
+name: arretai
+description: A new Flutter project.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^1.1.0
+  font_awesome_flutter: ^8.8.1
+  flutter_blue: ^0.7.2
+  intent: ^1.4.0
+  location: ^3.0.2
+  provider: ^4.3.2+2
+  shared_preferences: ^0.5.12
+
+dev_dependencies:
+  pedantic: ^1.9.0
+
+flutter:
+  uses-material-design: true
