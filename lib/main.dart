@@ -9,6 +9,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final prefs = await SharedPreferences.getInstance();
+
+  await prefs.clear();
+
   final state = AppState.fromSharedPrefs(prefs);
 
   runApp(
