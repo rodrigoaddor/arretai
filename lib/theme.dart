@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 
 ThemeData theme() {
-  final base = ThemeData.light();
+  final base = ThemeData.from(
+    colorScheme: ColorScheme.light(
+      primary: Colors.green[600],
+    ),
+  );
   return base.copyWith(
-    scaffoldBackgroundColor: Colors.grey[200],
+    buttonTheme: base.buttonTheme.copyWith(
+      buttonColor: Colors.green[600],
+      textTheme: ButtonTextTheme.primary
+    ),
   );
 }

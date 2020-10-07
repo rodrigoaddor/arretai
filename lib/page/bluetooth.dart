@@ -227,38 +227,44 @@ class _BluetoothPageState extends State<BluetoothPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Conectar Dispositivo'),
-        backgroundColor: Colors.teal[300],
-        flexibleSpace: !isScanning || state != BluetoothState.on
-            ? null
-            : Align(
-                alignment: Alignment.bottomCenter,
-                child: SizedBox(
-                  height: 3,
-                  child: LinearProgressIndicator(
-                    backgroundColor: Colors.teal[300],
-                    valueColor: AlwaysStoppedAnimation(Colors.teal[700]),
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pop(context, (await bluetooth.connectedDevices).isNotEmpty);
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Conectar Dispositivo'),
+          backgroundColor: Colors.teal[300],
+          flexibleSpace: !isScanning || state != BluetoothState.on
+              ? null
+              : Align(
+                  alignment: Alignment.bottomCenter,
+                  child: SizedBox(
+                    height: 3,
+                    child: LinearProgressIndicator(
+                      backgroundColor: Colors.teal[300],
+                      valueColor: AlwaysStoppedAnimation(Colors.teal[700]),
+                    ),
                   ),
                 ),
+        ),
+        body: state != BluetoothState.on
+            ? buildNoBluetooth()
+            : locationDenied ? buildNoLocation() : buildScanResults(isScanning),
+        floatingActionButton: state != BluetoothState.on
+            ? null
+            : FloatingActionButton(
+                child: AnimatedRotation(
+                  rotation: isScanning ? 1 : 0,
+                  duration: Duration(seconds: 1),
+                  curve: Curves.easeInOutBack,
+                  child: FaIcon(FontAwesomeIcons.redoAlt),
+                ),
+                onPressed: scan,
               ),
+        floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
       ),
-      body: state != BluetoothState.on
-          ? buildNoBluetooth()
-          : locationDenied ? buildNoLocation() : buildScanResults(isScanning),
-      floatingActionButton: state != BluetoothState.on
-          ? null
-          : FloatingActionButton(
-              child: AnimatedRotation(
-                rotation: isScanning ? 1 : 0,
-                duration: Duration(seconds: 1),
-                curve: Curves.easeInOutBack,
-                child: FaIcon(FontAwesomeIcons.redoAlt),
-              ),
-              onPressed: scan,
-            ),
-      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
     );
   }
 }
