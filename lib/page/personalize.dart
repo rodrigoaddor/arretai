@@ -227,7 +227,7 @@ class _PersonalizePageState extends State<PersonalizePage> {
                         child: TextFormField(
                           controller: timeController,
                           focusNode: timeFocus,
-                          autovalidate: false,
+                          autovalidateMode: AutovalidateMode.disabled,
                           validator: (str) =>
                               (int.tryParse(str) == null || int.tryParse(str) <= 0) ? 'Tempo inválido' : null,
                           keyboardType: TextInputType.number,

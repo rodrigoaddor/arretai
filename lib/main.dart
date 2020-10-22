@@ -10,6 +10,7 @@ void main() async {
 
   final prefs = await SharedPreferences.getInstance();
 
+  //TODO: DEBUG
   await prefs.clear();
 
   final state = AppState.fromSharedPrefs(prefs);

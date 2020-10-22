@@ -24,7 +24,7 @@ class _TimeDialogState extends State<TimeDialog> {
     if (!Form.of(context).validate()) return;
 
     final state = context.read<AppState>();
-    state.time = int.tryParse(controller.text) ?? 0;
+    state.time = int.tryParse(controller.text) ?? 5;
     Navigator.pop(context, state.time);
   }
 
@@ -36,7 +36,7 @@ class _TimeDialogState extends State<TimeDialog> {
           title: Text('Definir tempo na posição de alerta para vibrar'),
           content: TextFormField(
             controller: controller,
-            autovalidate: false,
+            autovalidateMode: AutovalidateMode.disabled,
             validator: (str) => (int.tryParse(str) == null || int.tryParse(str) <= 0) ? 'Tempo inválido' : null,
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
