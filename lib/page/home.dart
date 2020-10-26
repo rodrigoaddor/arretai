@@ -24,21 +24,21 @@ Map<_Stage, List<TextSpan>> stageMessages = {
     TextSpan(text: 'Conecte o '),
     TextSpan(text: 'Arret', style: TextStyle(color: Colors.green[600])),
     TextSpan(text: 'ai', style: TextStyle(color: Colors.grey[700])),
-    TextSpan(text: ' a seu celular'),
+    TextSpan(text: ' a seu celular.'),
   ],
   _Stage.Calibrate: [
     TextSpan(text: 'Calibre', style: TextStyle(color: Colors.green[600])),
     TextSpan(text: ' seu '),
     TextSpan(text: 'Arret', style: TextStyle(color: Colors.green[600])),
     TextSpan(text: 'ai', style: TextStyle(color: Colors.grey[700])),
-    TextSpan(text: ' para sua postura ideal'),
+    TextSpan(text: ' para sua postura ideal.'),
   ],
   _Stage.Adjust: [
     TextSpan(text: 'Com o '),
     TextSpan(text: 'Arret', style: TextStyle(color: Colors.green[600])),
     TextSpan(text: 'ai', style: TextStyle(color: Colors.grey[700])),
     TextSpan(text: ' posicionado, relaxe a postura e '),
-    TextSpan(text: 'ajuste o limite', style: TextStyle(color: Colors.green[600])),
+    TextSpan(text: 'ajuste o limite.', style: TextStyle(color: Colors.green[600])),
   ],
   _Stage.Done: [
     TextSpan(text: 'Seu '),
@@ -204,8 +204,22 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Builder(
         builder: (context) => Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 64),
+              child: SizedBox(
+                height: 48,
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  text: TextSpan(
+                    style: theme.textTheme.headline6,
+                    children: stageMessages[stage],
+                  ),
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 72),
               child: DecoratedBox(
@@ -218,63 +232,51 @@ class _HomePageState extends State<HomePage> {
                     : Image.asset('assets/images/postures/pos-$position.png'),
               ),
             ),
-            Column(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(child: SizedBox.shrink()),
-                    Expanded(
-                      flex: 3,
-                      child: SizedBox(
-                        height: 48,
-                        child: RaisedButton(
-                          child: Text('Calibrar'),
-                          onPressed: stage.index > 0 ? () => calibrate(context) : null,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: SizedBox.shrink(),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: SizedBox(
-                        height: 48,
-                        child: RaisedButton(
-                          child: Text(
-                            'Ajustar Limite',
-                            textAlign: TextAlign.center,
-                          ),
-                          onPressed: stage.index > 1 ? () => adjust(context) : null,
-                        ),
-                      ),
-                    ),
-                    Expanded(child: SizedBox.shrink()),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 48),
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      style: theme.textTheme.bodyText1,
-                      children: stageMessages[stage],
+                Expanded(child: SizedBox.shrink()),
+                Expanded(
+                  flex: 4,
+                  child: SizedBox(
+                    height: 56,
+                    child: RaisedButton(
+                      child: Text('Calibrar'),
+                      onPressed: stage.index > 0 ? () => calibrate(context) : null,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
                   ),
                 ),
-                BigIconButton(
-                  icon: Icon(Icons.bluetooth),
-                  label: Text('Conectar'),
-                  onPressed: () => connect(context),
-                  color: Colors.blueAccent[200],
-                  textColor: Colors.white,
-                  size: 18,
-                  padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                Expanded(
+                  flex: 2,
+                  child: SizedBox.shrink(),
                 ),
+                Expanded(
+                  flex: 4,
+                  child: SizedBox(
+                    height: 56,
+                    child: RaisedButton(
+                      child: Text(
+                        'Ajustar Limite',
+                        textAlign: TextAlign.center,
+                      ),
+                      onPressed: stage.index > 1 ? () => adjust(context) : null,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                  ),
+                ),
+                Expanded(child: SizedBox.shrink()),
               ],
             ),
+            BigIconButton(
+                icon: Icon(Icons.bluetooth),
+                label: Text('Conectar'),
+                onPressed: () => connect(context),
+                color: Colors.blueAccent[200],
+                textColor: Colors.white,
+                size: 22,
+                padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                borderRadius: BorderRadius.circular(12)),
           ],
         ),
       ),
