@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:arretai/utils.dart';
 import 'package:arretai/widget/big_icon_button.dart';
@@ -14,7 +15,7 @@ final _bluetooth = FlutterBlue.instance;
 enum _Stage { Connect, Calibrate, Adjust, Done }
 
 Map<_Stage, String> stageImage = {
-  _Stage.Connect: 'posture-disabled.png',
+  _Stage.Connect: 'posture-straight.png',
   _Stage.Calibrate: 'posture-straight.png',
   _Stage.Adjust: 'posture-relaxed.png',
 };
@@ -184,7 +185,13 @@ class _HomePageState extends State<HomePage> {
     if (time != null) {
       try {
         final device = await getDevice();
-        await device.write(utf8.encode('tempo:$time'));
+        var message = 'tempo:$time';
+        if (time < 10) {
+          message = 'd$message';
+        } else if (time > 99) {
+          message = 'c$message';
+        }
+        await device.write(utf8.encode(message));
       } catch (e) {
         Scaffold.of(context).showSnackBar(SnackBar(
           content: Text('Nenhum dispositivo conectado!' + (kDebugMode ? '\nTempo: $time' : '')),
@@ -220,16 +227,33 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 72),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 4),
+            ClipRect(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 72, vertical: 4),
+                child: Stack(
+                  children: [
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.white, width: 4),
+                      ),
+                      child: stage != _Stage.Done
+                          ? Image.asset(
+                              'assets/images/${stageImage[stage]}',
+                            )
+                          : Image.asset('assets/images/postures/pos-$position.png'),
+                    ),
+                    if (stage == _Stage.Connect)
+                      Positioned.fill(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                          child: Container(
+                            color: Colors.black.withOpacity(0),
+                          ),
+                        ),
+                      )
+                  ],
                 ),
-                child: stage != _Stage.Done
-                    ? Image.asset('assets/images/${stageImage[stage]}')
-                    : Image.asset('assets/images/postures/pos-$position.png'),
               ),
             ),
             Row(
@@ -268,6 +292,14 @@ class _HomePageState extends State<HomePage> {
                 Expanded(child: SizedBox.shrink()),
               ],
             ),
+            SizedBox(
+              height: 56,
+              child: RaisedButton(
+                child: Text('Ajustar Tempo'),
+                onPressed: stage == _Stage.Connect ? null : () => setTime(context),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+            ),
             BigIconButton(
                 icon: Icon(Icons.bluetooth),
                 label: Text('Conectar'),
@@ -281,15 +313,25 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 4),
-            Text('Ajuda'),
-            Icon(Icons.help_outline),
-          ],
+        backgroundColor: Colors.white,
+        child: SizedBox.expand(
+          child: DecoratedBox(
+            decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: Colors.black, width: 2)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: 4),
+                Text('Ajuda',
+                    style: theme.textTheme.button.copyWith(color: Colors.red[700], fontWeight: FontWeight.w700)),
+                Icon(
+                  Icons.help_outline,
+                  color: Colors.grey[800],
+                ),
+              ],
+            ),
+          ),
         ),
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(context, '/help'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
     );

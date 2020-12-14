@@ -1,0 +1,31 @@
+- question: O Arretai funciona sem o App?
+  answer: Sim, o Arretai possui a função de auto detecção de postura ideal. Basta posicionar seu Arretai alinhado a sua coluna com o auxilio do colar, depois de posicionado ligar a chave Liga/Desliga e sperar 3 segundos com a postura correta. O Arretai vai gravar essa postura e sempre que estiver encurvado(a) ele irá vibrar te lembrando de manter a postura saudável que deseja.
+
+- question: Como conectar meu Arretai ao celular?
+  answer: |-
+    Bem simples:
+    1º - No seu celular habilite o Bluetooth e a localização (sua localização não é utilizada para nenhuma finalidade é apenas um requisito do Bluetooth de baixa energia);
+    2º - Ligue a chave Liga/Desliga do seu Arretai;
+    3º - Clique no botão “Conectar” aqui no app e busque pelo Arretai na lista de dispositivos (caso não tenha aparecido, aperte o circulo na parte inferior direita do app para atualizar a lista de dispositivos pareáveis). Lembre-se que o Arretai deve estar ligado. Se mesmo assim não aparecer deixe o aparelho carregando por pelo menos 20 minutinhos;
+    4º - Ao conectar seu Arretai ao celular você sentirá uma vibração longa confirmando a conexão e logo abaixo do nome Arretai aparecerá a palavra “Conectado”;
+
+- question: Como calibrar meu Arretai?
+  answer: |-
+    Com seu Arretai conectado ao celular via Bluetooth, volte à tela inicial e você notará que agora o botão “Calibrar” estará verde. Basta ficar com o Arretai posicionado na coluna e manter a postura ideal que deseja, aperte o botão “Calibrar” e essa postura será atualizada como postura ideal (você sentirá uma vibração longa informando que a postura ideal foi atualizada);
+    O botão “Ajustar Limite” agora estará verde também. Relaxe a coluna e fique na posição que deseja corrigir, aperte o botão “Ajustar Limite” (você sentira uma vibração longa informando que o limite foi atualizado);
+    Depois de configurado você poderá ver em tempo real sua postura ser atualizada no app como uma forma de feedback da sua calibração.
+
+- question: Meu Arretai está vibrando toda hora e me desconcentrando, posso aumentar o tempo em que ele me lembrará?
+  answer: Sim, você pode personalizar o tempo que gostaria de ser lembrado(a), ou seja, a partir de quantos segundos com a coluna na posição errada você gostaria de ser lembrado(a)? (você pode testar varias formas possíveis, nós indicamos a partir de 30s para evitar incomodar e conseguir manter-se focado no trabalho);
+
+- question: Posso usar a detecção de postura ideal sem calibrar, mas alterar apenas o tempo?
+  answer: Sim, você precisa apenas conectar seu Arretai ao celular e clicar no botão “Ajustar Tempo”. Lembre-se  que a postura será salva no momento em que ligar a chave Liga/Desliga do Arretai.
+
+- question: A imagem está desfocada, o que houve?
+  answer: Se a imagem do boneco estiver desfocada, significa que seu Arretai não está conectado ao celular. Basta conecta-lo seguindo o procedimento da segunda pergunta desta lista.
+
+- question: Como carregar meu Arretai?
+  answer: Basta utilizar a fonte que acompanha o aparelho. A fonte é bivolt podendo ser ligada tanto em 127V quanto em 220V. O processo de carga do Arretai leva em média 3 horas e sua carga dura aproximadamente 8 horas.
+
+- question: Sua dúvida não está aqui respondida?
+  answer: Você sempre pode entrar em contato conosco pelo e-mail contato@saludetecnologias.com.br ou ainda pelo WhatsApp (35) 9-9250-1158. Entre em contato conosco, é sempre um prazer atender nossos apoiadores. :)
